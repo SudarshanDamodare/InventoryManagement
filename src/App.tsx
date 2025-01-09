@@ -1,11 +1,9 @@
-import React from 'react';
+import Inventory from './components/Inventory';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        Hello World
-      </header>
+    <div className='App'>
+      <Inventory />
     </div>
   );
 }
