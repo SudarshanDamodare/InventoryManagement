@@ -38,7 +38,7 @@ const inventoryReducer = (state = initialState, action: any) => {
       return updateProductReduce(state, action.payload);
     case 'DELETE_PRODUCT':
       const updatedProducts = state.products.filter((product: Product) => {
-        return (
+        return !(
           product.name !== action.payload.name &&
           product.category !== action.payload.category
         );
