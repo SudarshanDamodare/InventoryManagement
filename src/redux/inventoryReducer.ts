@@ -1,4 +1,3 @@
-import { Value } from './../../node_modules/@vercel/static-config/dist/swc.d';
 import {
   getComputedProperties,
   updateProductReduce,

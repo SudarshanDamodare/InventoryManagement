@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreType } from '../redux/store';
 import {
@@ -15,6 +15,7 @@ import axios from 'axios';
 import { Product } from '../redux/inventoryReducer';
 import Actions from './Actions';
 import { sanitizeResponse } from '../constants/helpers';
+import Loader from './Loader';
 
 const MOCK_PRODUCTS = [
   {
@@ -57,10 +58,12 @@ const MOCK_PRODUCTS = [
 const ListComponent = () => {
   const { products } = useSelector((state: StoreType) => state.inventory);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get(
           'https://dev-0tf0hinghgjl39z.api.raw-labs.com/inventory'
         );
@@ -70,12 +73,14 @@ const ListComponent = () => {
         });
       } catch (error) {
         console.error('Error fetching products:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchProducts();
   }, []);
-  console.log(products);
+
   return (
     <TableContainer
       component={Paper}
@@ -88,6 +93,7 @@ const ListComponent = () => {
         },
       }}
     >
+      <Loader isLoading={isLoading} />
       <Table>
         <TableHead>
           <TableRow>
