@@ -34,7 +34,7 @@ const Actions = (props: ActionsProps) => {
             sx={{
               color: disabled || !product.enable ? disableIconColor : '#387C21',
             }}
-            onClick={() => setOpen(true)}
+            onClick={() => product.enable && setOpen(true)}
           />
         </IconButton>
         <IconButton>
